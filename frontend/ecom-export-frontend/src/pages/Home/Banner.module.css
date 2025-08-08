@@ -1,0 +1,32 @@
+.banner {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #6a11cb, #3d7ff0);
+    color: white;
+}
+
+.banner h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.banner p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.banner h1 {
+    animation: float 3s ease-in-out infinite;
+}
