@@ -17,6 +17,7 @@ function App() {
           <Route path="/About" element={<About />} />
         </Routes>
       </>
+
     </Router>
   );
 }
