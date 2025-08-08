@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import styles from './About.module.css';
 import Mission from './Mission';
 import Team from './Team';
@@ -8,6 +10,7 @@ const About = () => {
   return (
     
     <div className={styles.aboutContainer}>
+        <Header />
       <h1>About Us</h1>
       <p className={styles.intro}>
         <b>Welcome to our export-focused marketplace, your trusted destination for premium quality Indian products. Our platform is designed to connect global buyers with authentic Indian craftsmanship, textiles, and spiritual goods.</b>
@@ -32,6 +35,7 @@ const About = () => {
       <Mission />
       <Team />
       <History />
+      <Footer />
     </div>
   );
 };
