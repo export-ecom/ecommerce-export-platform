@@ -1,9 +1,12 @@
 import React from 'react';
-import styles from './Button.module.css';
 
 function Button({ children, onClick, type = 'button' }) {
     return (
-        <button className={styles.btn} onClick={onClick} type={type}>
+        <button
+            type={type}
+            className="btn btn-primary fw-semibold custom-btn"
+            onClick={onClick}
+        >
             {children}
         </button>
     );
