@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Home.module.css';
 
 import Header from '../../components/Header/Header';
 import AIAssistant from '../../components/AIAssistant/AIAssistant';
@@ -8,17 +7,20 @@ import Banner from './Banner';
 import Features from './Features';
 import Testimonials from './Testimonials';
 
-
 function Home() {
     return (
         <>
             <Header />
-            <main className={styles.main}>
+            <main className="container px-3">
                 <Banner />
                 <Features />
                 <Testimonials />
-                <AIAssistant />
+
+                <div className="d-flex justify-content-center my-4">
+                    <AIAssistant />
+                </div>
             </main>
+
             <Footer />
         </>
     );
