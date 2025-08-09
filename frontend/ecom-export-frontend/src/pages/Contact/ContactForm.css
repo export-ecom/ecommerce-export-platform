@@ -1,0 +1,91 @@
+.contactForm {
+  background: #fff;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  animation: slideInUp 0.8s ease forwards;
+}
+
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.formGroup {
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+
+input:focus, textarea:focus {
+  border-color: #0b74ff;
+  box-shadow: 0 0 8px rgba(11, 116, 255, 0.2);
+  outline: none;
+  transform: scale(1.01);
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+}
+
+.success {
+  color: green;
+  margin-top: 10px;
+}
+
+.formActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary, .btnWhatsApp {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.btnPrimary {
+  background: #0b74ff;
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  background: #095dcc;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(11, 116, 255, 0.3);
+}
+
+
+.btnWhatsApp {
+  background: #25D366;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btnWhatsApp:hover {
+  background: #14f868;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 255, 94, 0.3);
+}
