@@ -7,6 +7,7 @@ import Contact from './pages/Contact/Contact';
 import Login from "./pages/Auth/LoginForm";
 import RegisterForm from './pages/Auth/RegisterForm';
 import Auth from "./pages/Auth/Auth";
+import FAQ from './pages/FAQ/Faq';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/FAQ" element={<FAQ />} />
         </Routes>
       </>
 
