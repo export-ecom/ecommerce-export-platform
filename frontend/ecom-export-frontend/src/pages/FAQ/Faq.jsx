@@ -40,7 +40,7 @@ const FAQ = () => {
         <Header />
       <div className="faq-container">
         <button className="back-btn" onClick={() => navigate(-1)}>
-          ⬅ Previous Page
+          Export-ecom
         </button>
 
         <h1 className="faq-title">Frequently Asked Questions</h1>
