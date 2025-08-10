@@ -1,0 +1,65 @@
+.auth-bg {
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.auth-logo {
+    max-height: 80px;
+    animation: pulseLogo 1.5s infinite;
+
+}
+
+.btn-animated {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-animated:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.animated-slide {
+    animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseLogo {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

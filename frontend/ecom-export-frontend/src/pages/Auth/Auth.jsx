@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import Header from '../../components/Header/Header';
+import "./Auth.css"; // custom styling
+import companyLogo from "../../assets/EcomLogo.png";
 
 export default function Auth() {
     const [isLogin, setIsLogin] = useState(true);
 
     return (
-        <div className="container d-flex justify-content-center align-items-center min-vh-100">
-            <div className="card shadow-lg p-4" style={{ maxWidth: "450px", width: "100%" }}>
+        <div className="auth-bg d-flex justify-content-center align-items-center min-vh-100">
+            <Header />
+            <div className="auth-card p-4 shadow-lg text-center">
+                {/* Company Logo */}
+                <div className="mb-4">
+                    <img
+                        src={companyLogo}
+                        alt="Company Logo"
+                        className="auth-logo"
+                    />
+                </div>
 
                 {/* Toggle Buttons */}
-                <div className="btn-group mb-4 w-100">
+                <div className="btn-group w-100 mb-4">
                     <button
                         className={`btn ${isLogin ? "btn-primary" : "btn-outline-primary"}`}
                         onClick={() => setIsLogin(true)}
@@ -25,8 +37,8 @@ export default function Auth() {
                     </button>
                 </div>
 
-                {/* Animated form */}
-                <div className="fade show">
+                {/* Animated Forms */}
+                <div className={`auth-form animated-slide`}>
                     {isLogin ? <LoginForm /> : <RegisterForm />}
                 </div>
             </div>

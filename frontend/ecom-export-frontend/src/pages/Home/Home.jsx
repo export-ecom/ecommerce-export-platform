@@ -17,7 +17,7 @@ function Home() {
                 <Testimonials />
 
                 <div className="d-flex justify-content-center my-4">
-                    <AIAssistant />
+                    {/* <AIAssistant /> */}
                 </div>
             </main>
 
