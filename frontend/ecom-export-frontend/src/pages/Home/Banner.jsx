@@ -1,12 +1,26 @@
 import React from 'react';
 import Button from '../../components/Button/Button';
+import './Banner.css';
+import { useNavigate } from "react-router-dom";
 
 function Banner() {
+    const navigate = useNavigate();
     return (
-        <section className="text-center py-5 px-3 banner-section text-white">
-            <h1 className="display-4 fw-bold animated-float">Welcome to MySite</h1>
-            <p className="fs-5 mb-4">Your one-stop solution for amazing products.</p>
-            <Button onClick={() => alert('Get Started clicked!')}>Get Started</Button>
+        <section className="banner-section text-white text-center d-flex flex-column justify-content-center align-items-center">
+            <div className="banner-content">
+                <h1 className="display-3 fw-bold mb-3 fade-in">
+                    Welcome to <span className="highlight">Export-Ecom</span>
+                </h1>
+                <p className="lead mb-4 fade-in-delay">
+                    Your one-stop solution for Exporting products.
+                </p>
+                <Button
+                    className="btn-lg btn-modern"
+                    onClick={() => navigate("/auth")}
+                >
+                    Login/Register
+                </Button>
+            </div>
         </section>
     );
 }

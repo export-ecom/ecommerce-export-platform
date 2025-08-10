@@ -3,20 +3,17 @@ import React, { useState } from "react";
 export default function RegisterForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
 
     const handleRegister = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
+        if (password !== confirm) {
             alert("Passwords do not match");
             return;
         }
-        console.log("Registering", { name, email, password });
-    };
-
-    const handleGoogleLogin = () => {
-        console.log("Register with Google");
+        console.log("Registering", { name, email, phone, password });
     };
 
     return (
@@ -38,6 +35,14 @@ export default function RegisterForm() {
                 required
             />
             <input
+                type="tel"
+                className="form-control"
+                placeholder="Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+            />
+            <input
                 type="password"
                 className="form-control"
                 placeholder="Password"
@@ -49,22 +54,16 @@ export default function RegisterForm() {
                 type="password"
                 className="form-control"
                 placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
                 required
             />
-            <button type="submit" className="btn btn-success w-100">
+            <button type="submit" className="btn btn-success w-100 btn-animated">
                 Register
             </button>
-
-            <div className="text-center fw-bold text-muted">OR</div>
-
-            <button
-                type="button"
-                className="btn btn-outline-danger w-100"
-                onClick={handleGoogleLogin}
-            >
-                <i className="bi bi-google me-2"></i> Register with Google
+            <div className="text-muted small">Or continue with</div>
+            <button type="button" className="btn btn-outline-danger w-100 btn-animated">
+                <i className="bi bi-google me-2"></i> Google
             </button>
         </form>
     );

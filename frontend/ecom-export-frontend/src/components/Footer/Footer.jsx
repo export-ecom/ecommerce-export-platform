@@ -16,11 +16,11 @@ function Footer() {
                 <li className="list-inline-item">
                     <a href="/privacy" className="text-secondary text-decoration-none hover-text-light">Privacy Policy</a>
                 </li>
-                <li className="list-inline-item">
+                {/* <li className="list-inline-item">
                     <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="text-secondary text-decoration-none hover-text-light">
                         WhatsApp
                     </a>
-                </li>
+                </li> */}
             </ul>
             <p className="mb-0 small">© 2025 MySite. All rights reserved.</p>
         </footer>

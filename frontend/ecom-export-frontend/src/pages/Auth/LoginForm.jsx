@@ -9,10 +9,6 @@ export default function LoginForm() {
     console.log("Logging in", { email, password });
   };
 
-  const handleGoogleLogin = () => {
-    console.log("Logging in with Google");
-  };
-
   return (
     <form onSubmit={handleLogin} className="d-flex flex-column gap-3">
       <input
@@ -31,18 +27,12 @@ export default function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit" className="btn btn-primary w-100">
+      <button type="submit" className="btn btn-primary w-100 btn-animated">
         Login
       </button>
-
-      <div className="text-center fw-bold text-muted">OR</div>
-
-      <button
-        type="button"
-        className="btn btn-outline-danger w-100"
-        onClick={handleGoogleLogin}
-      >
-        <i className="bi bi-google me-2"></i> Login with Google
+      <div className="text-muted small">Or continue with</div>
+      <button type="button" className="btn btn-outline-danger w-100 btn-animated">
+        <i className="bi bi-google me-2"></i> Google
       </button>
     </form>
   );
