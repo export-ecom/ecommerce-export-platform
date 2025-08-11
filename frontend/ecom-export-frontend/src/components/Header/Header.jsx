@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AIAssistant from "../AIAssistant/AIAssistant";
 import "./Header.css"; // For small extra styling
 
+
 function Header() {
     const [isOpen, setIsOpen] = useState(false);
 
