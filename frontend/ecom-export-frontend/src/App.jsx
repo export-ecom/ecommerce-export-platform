@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
-import Login from "./pages/Auth/LoginForm";
-import RegisterForm from './pages/Auth/RegisterForm';
+// import Login from "./pages/Auth/LoginForm";
+// import RegisterForm from './pages/Auth/RegisterForm';
 import Auth from "./pages/Auth/Auth";
 import FAQ from './pages/FAQ/Faq';
 import Terms from "./pages/Policies/Terms";
@@ -13,6 +13,7 @@ import Privacy from "./pages/Policies/Privacy";
 import ShippingReturn from "./pages/Policies/ShippingReturn";
 import BlogList from "./pages/Blog/BlogList";
 import BlogDetail from "./pages/Blog/BlogDetail";
+import InquiryRequestPage from './pages/InquiryPage/InquiryRequestPage';
 
 
 function App() {
@@ -23,9 +24,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/inquiry" element={<InquiryRequestPage />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
