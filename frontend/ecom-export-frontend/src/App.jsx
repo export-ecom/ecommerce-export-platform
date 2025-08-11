@@ -11,6 +11,8 @@ import FAQ from './pages/FAQ/Faq';
 import Terms from "./pages/Policies/Terms";
 import Privacy from "./pages/Policies/Privacy";
 import ShippingReturn from "./pages/Policies/ShippingReturn";
+import BlogList from "./pages/Blog/BlogList";
+import BlogDetail from "./pages/Blog/BlogDetail";
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/shipping" element={<ShippingReturn />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
         </Routes>
       </>
 

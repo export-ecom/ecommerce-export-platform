@@ -3,7 +3,7 @@
   color: black;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(230, 224, 224, 0.05);
   animation: slideInUp 0.8s ease forwards;
 }
 
@@ -27,9 +27,11 @@ label {
 input, textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 3px solid #bdbbbb;
+  border-radius: 8px;
   font-size: 1rem;
+  background-color: #fff; 
+  color: #000; 
   transition: all 0.3s ease;
 }
 
@@ -55,6 +57,7 @@ input:focus, textarea:focus {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  justify-content: center
 }
 
 .btnPrimary, .btnWhatsApp {
@@ -63,6 +66,7 @@ input:focus, textarea:focus {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
+  
 }
 
 
@@ -78,14 +82,4 @@ input:focus, textarea:focus {
 }
 
 
-.btnWhatsApp {
-  background: #25D366;
-  color: #fff;
-  text-decoration: none;
-}
 
-.btnWhatsApp:hover {
-  background: #14f868;
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 255, 94, 0.3);
-}

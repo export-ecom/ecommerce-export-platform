@@ -16,11 +16,11 @@
   font-size: 2rem;
   margin-bottom: 40px;
 }
-.contactHeading {
+/* .contactHeading {
   text-align: center;
   margin-bottom: 1.5rem;
   color: #004080;
-}
+} */
 
 
 .contactGrid {
@@ -57,4 +57,50 @@
   .contactGrid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 600px) {
+  .contactHeaderRow {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+  @media (max-width: 600px) {
+  .btnWhatsApp {
+    position: static; 
+    margin: 10px auto 0; 
+    display: inline-block;
+  }
+}
+
+
+
+.contactHeaderRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin-bottom: 1.5rem;
+}
+
+.contactHeading {
+  margin: 0;
+  color: #004080;
+}
+
+.btnWhatsApp {
+  position: absolute;
+  right: 0; 
+  background: #25D366;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btnWhatsApp:hover {
+  background: #14f868;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 255, 94, 0.3);
 }

@@ -31,9 +31,9 @@ function Header() {
                         <li className="nav-item">
                             <a className="nav-link nav-link-hover" href="/products">Products</a>
                         </li>
-                        {/* <li className="nav-item">
-                            <a className="nav-link nav-link-hover" href="/auth">Login / Register</a>
-                        </li> */}
+                        <li className="nav-item">
+                            <a className="nav-link nav-link-hover" href="/blog">Blog/News</a>
+                        </li>
                         <li className="nav-item">
                             <a className="nav-link nav-link-hover" href="/contact">Contact Us</a>
                         </li>
