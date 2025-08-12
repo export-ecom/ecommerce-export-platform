@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Header from '../../components/Header/Header';
-import "./Auth.css"; // custom styling
+import "./Auth.css";
 import companyLogo from "../../assets/EcomLogo.png";
+
+
+
 
 export default function Auth() {
     const [isLogin, setIsLogin] = useState(true);
+
+
 
     return (
         <div className="auth-bg d-flex justify-content-center align-items-center min-vh-100">
@@ -41,6 +46,7 @@ export default function Auth() {
                 <div className={`auth-form animated-slide`}>
                     {isLogin ? <LoginForm /> : <RegisterForm />}
                 </div>
+
             </div>
         </div>
     );
