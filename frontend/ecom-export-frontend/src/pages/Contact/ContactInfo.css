@@ -19,6 +19,13 @@
     transform: translateX(0);
   }
 }
+@media (max-width: 600px) {
+  .contactInfo {
+    padding: 15px;
+    text-align: center;
+  }
+}
+
 
 
 .contactInfo:hover {

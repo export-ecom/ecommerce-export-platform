@@ -91,14 +91,7 @@ const ContactForm = () => {
         <button type="submit" className="btnPrimary">
           Send Message
         </button>
-        <a
-          href="https://wa.me/911234567890"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btnWhatsApp"
-        >
-          Message on WhatsApp
-        </a>
+        
       </div>
 
       {success && (
