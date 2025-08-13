@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
@@ -14,14 +14,21 @@ import ShippingReturn from "./pages/Policies/ShippingReturn";
 import BlogList from "./pages/Blog/BlogList";
 import BlogDetail from "./pages/Blog/BlogDetail";
 import InquiryRequestPage from './pages/InquiryPage/InquiryRequestPage';
+import ProductList from './pages/Product/ProductList';
+import ProductDetailPage from "./pages/Product/ProductDetail";
+
+
 
 
 function App() {
 
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+  }, []);
+
   return (
     <Router>
       <>
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/inquiry" element={<InquiryRequestPage />} />
@@ -34,6 +41,8 @@ function App() {
           <Route path="/shipping" element={<ShippingReturn />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:id" element={<ProductDetailPage/>} />
         </Routes>
       </>
 

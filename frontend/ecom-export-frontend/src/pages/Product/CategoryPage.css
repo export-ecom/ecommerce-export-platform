@@ -1,0 +1,22 @@
+.category-page {
+  padding: 20px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.category-card {
+  padding: 15px;
+  background: #f4f4f4;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.category-card:hover {
+  background: #ddd;
+}
