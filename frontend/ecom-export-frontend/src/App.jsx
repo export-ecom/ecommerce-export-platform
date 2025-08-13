@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState,useEffect} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
-// import Login from "./pages/Auth/LoginForm";
-// import RegisterForm from './pages/Auth/RegisterForm';
 import Auth from "./pages/Auth/Auth";
 import FAQ from './pages/FAQ/Faq';
 import Terms from "./pages/Policies/Terms";
@@ -19,39 +18,40 @@ import ProductDetailPage from "./pages/Product/ProductDetail";
 
 
 
+// Dashboards
+import CustomerDashboard from './pages/CustomerDashboard/CustomerDashboard';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+
+// Profile Settings
+import CustomerProfileSettings from './pages/CustomerDashboard/ProfileSettings';
+import AdminProfileSettings from './pages/AdminDashboard/ProfileSettings';
 
 function App() {
-
-  useEffect(() => {
-    window.history.scrollRestoration = "manual";
-  }, []);
-
   return (
     <Router>
-      <>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/inquiry" element={<InquiryRequestPage />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/shipping" element={<ShippingReturn />} />
-          <Route path="/blog" element={<BlogList />} />
-          <Route path="/blog/:slug" element={<BlogDetail />} />
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/products/:id" element={<ProductDetailPage/>} />
-        </Routes>
-      </>
+      <Routes>
+        {/* Public Pages */}
+        <Route path="/" element={<Home />} />
+        <Route path="/inquiry" element={<InquiryRequestPage />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/FAQ" element={<FAQ />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/shipping" element={<ShippingReturn />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/products/:id" element={<ProductDetailPage />} />
 
+        {/* Dashboards */}
+        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+        <Route path="/customer/profile" element={<CustomerProfileSettings />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/profile" element={<AdminProfileSettings />} />
+      </Routes>
     </Router>
   );
 }
-
 export default App;
-
-
-
-
