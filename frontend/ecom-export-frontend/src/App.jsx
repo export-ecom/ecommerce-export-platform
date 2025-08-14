@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as  Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
