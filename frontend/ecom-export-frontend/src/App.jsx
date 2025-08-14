@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as  Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
@@ -28,7 +28,7 @@ import AdminProfileSettings from './pages/AdminDashboard/ProfileSettings';
 
 function App() {
   return (
-    <Router>
+
       <Routes>
         {/* Public Pages */}
         <Route path="/" element={<Home />} />
@@ -50,7 +50,7 @@ function App() {
         <Route path="/customer/profile" element={<CustomerProfileSettings />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfileSettings />} />
-      </Routes>
+    
     </Router>
   );
 }
