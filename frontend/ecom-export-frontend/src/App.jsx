@@ -51,7 +51,7 @@ function App() {
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin/profile" element={<AdminProfileSettings />} />
     
-    </Router>
+    </Routes>
   );
 }
 export default App;
