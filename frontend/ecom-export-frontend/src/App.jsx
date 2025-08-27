@@ -16,6 +16,10 @@ import BlogDetail from "./pages/Blog/BlogDetail";
 import InquiryRequestPage from './pages/InquiryPage/InquiryRequestPage';
 import ProductList from './pages/Product/ProductList';
 import ProductDetailPage from "./pages/Product/ProductDetail";
+import CartPage from "./pages/Cart/Cart";
+import CheckoutPage from './pages/Checkout/Checkout';
+
+
 
 
 
@@ -45,6 +49,10 @@ function App() {
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+
+
 
         {/* Dashboards */}
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />

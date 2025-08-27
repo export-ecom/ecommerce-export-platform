@@ -22,7 +22,7 @@ function Footer() {
                     </a>
                 </li> */}
             </ul>
-            <p className="mb-0 small">© 2025 MySite. All rights reserved.</p>
+            <p className="mb-0 small">© Oringo International All rights reserved.</p>
         </footer>
     );
 }

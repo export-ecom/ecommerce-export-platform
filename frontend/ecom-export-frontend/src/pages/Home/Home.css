@@ -1,0 +1,165 @@
+/* --- PARALLAX SECTION --- */
+.parallax-section {
+  position: relative;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  perspective: 1500px; /* For 3D depth */
+}
+
+/* Background Layers with Parallax Depth */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Fit container */
+  height: 100%;
+  background-repeat: no-repeat; /* Better clarity */
+  background-size: cover; /* Maintain aspect ratio */
+  background-position: center center; /* Centered image */
+  z-index: 0;
+  opacity: 0;
+  animation: cinematicScroll 30s ease-in-out infinite;
+  transform: translateZ(-150px) scale(1.05); /* Subtle 3D effect without blur */
+}
+
+/* Layer Images */
+.parallax-layer.layer1 {
+  background-image: url("../../assets/homebg2.jpg");
+  animation-delay: 0s;
+}
+.parallax-layer.layer2 {
+  background-image: url("../../assets/homebg1.jpg");
+  animation-delay: 10s;
+}
+.parallax-layer.layer3 {
+  background-image: url("../../assets/bg.png");
+  animation-delay: 20s;
+}
+
+/* Cinematic Background Sliding */
+@keyframes cinematicScroll {
+  0% {
+    transform: translateX(0) translateZ(-150px) scale(1.05);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(-33.33%) translateZ(-150px) scale(1.05);
+    opacity: 1;
+  }
+  35% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateZ(-150px) scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* Overlay with Smooth Fade */
+.parallax-section .overlay {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 3rem 4rem;
+  border-radius: 18px;
+  max-width: 950px;
+  width: 90%;
+  z-index: 2;
+  backdrop-filter: blur(4px); /* Slight blur for focus */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+/* Headings & Text */
+.title-animate {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #ff6f61, #ffcc70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 3s ease-in-out infinite;
+}
+
+.subtitle-animate {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  opacity: 0.85;
+}
+
+/* Title Glow Animation */
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 5px #ff6f61); }
+  50% { filter: drop-shadow(0 0 15px #ffcc70); }
+}
+
+/* Gradient Separator with Animation */
+.gradient-separator {
+  width: 70%;
+  height: 4px;
+  margin: 2.5rem auto;
+  background: linear-gradient(270deg, #ff6f61, #ffcc70, #6e8efb, #a777e3);
+  background-size: 400% 400%;
+  border-radius: 10px;
+  animation: gradientMove 5s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hover 3D Tilt Effect for Cards */
+.feature-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+.feature-card:hover {
+  transform: rotateY(10deg) rotateX(5deg) scale(1.07);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+/* Testimonials Compact */
+.testimonial-compact {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Fade In Animation for Elements */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .parallax-section {
+    min-height: 320px;
+  }
+  .title-animate {
+    font-size: 2rem;
+  }
+  .subtitle-animate {
+    font-size: 1rem;
+  }
+}
+
+/* Testimonials Parallax Background */
+.parallax-alt {
+  background-image: url("../../assets/handicraft.jpg"); /* Use your existing image path */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}

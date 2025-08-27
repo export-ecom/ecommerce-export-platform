@@ -1,9 +1,85 @@
-/* Gradient primary background */
 .bg-gradient-primary {
-    background: linear-gradient(90deg, #007bff, #0056b3);
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.6) 0%,   /* Dark overlay behind logo */
+        #007bff 30%,             /* Blend into primary color */
+        #0056b3 100%             /* Right side solid blue */
+    );
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover underline animation */
+/* ✅ Logo Styling */
+.logo-img {
+    height: 30px;
+    width: auto;
+    object-fit: contain;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* ✨ Logo hover effect - Scale + Glow */
+/* ✅ Logo Styling with Soft Glow */
+.logo-img {
+    height: 30px; /* Adjust logo size */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ✅ Simple Glow Effect on Hover */
+.logo-img:hover {
+    transform: scale(1.05); /* Slight zoom */
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7); /* Soft white glow */
+    border-radius: 6px; /* Optional: makes glow look smoother */
+}
+
+
+/* ✅ Infinite Shining Effect (Always Active) */
+.logo-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shine 2.5s infinite ease-in-out;
+    pointer-events: none;
+}
+
+/* ✨ Stronger shine on hover */
+.logo-img:hover::before {
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.3) 100%
+    );
+}
+
+/* ✅ Shine Animation */
+@keyframes shine {
+    0% {
+        left: -75%;
+    }
+    100% {
+        left: 125%;
+    }
+}
+
+/* 🌟 Hover underline animation for nav links */
 .nav-link-hover {
     position: relative;
     transition: color 0.2s ease-in-out;
@@ -22,12 +98,4 @@
 
 .nav-link-hover:hover::after {
     width: 100%;
-}
-
-/* Floating AI Assistant */
-.ai-assistant-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1050;
 }

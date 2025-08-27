@@ -9,7 +9,7 @@ function Banner() {
         <section className="banner-section text-white text-center d-flex flex-column justify-content-center align-items-center">
             <div className="banner-content">
                 <h1 className="display-3 fw-bold mb-3 fade-in">
-                    Welcome to <span className="highlight">Export-Ecom</span>
+                    Welcome to <span className="highlight">Oringo International</span>
                 </h1>
                 <p className="lead mb-4 fade-in-delay">
                     Your one-stop solution for Exporting products.

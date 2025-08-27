@@ -1,21 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCategory from "./CategoryPage";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./ProductList.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import products from "./Products";
+import categoryData from "./CategoryData";
+import QuotationForm from "../../components/QuotationForm"; 
 
 export default function ProductListPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialCategory = queryParams.get("category") || "Foods"; // default to Foods
+
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("default");
   const [lightboxImage, setLightboxImage] = useState(null);
 
-  const filteredByCategory =
-    selectedCategory === "All"
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
+  useEffect(() => {
+    const category = queryParams.get("category") || "Foods";
+    setSelectedCategory(category);
+  }, [location.search]);
+
+  const filteredByCategory = products.filter(
+    (p) => p.category === selectedCategory
+  );
 
   const filteredProducts = filteredByCategory.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -38,6 +48,8 @@ export default function ProductListPage() {
     }
   });
 
+  const categoryList = ["Foods", "Spiritual Items", "Handicrafts", "Medical"];
+
   return (
     <div className="page-container">
       <Header />
@@ -46,13 +58,7 @@ export default function ProductListPage() {
         <h1>Our Products</h1>
 
         <ProductCategory
-          categories={[
-            "All",
-            "Wooden Handicrafts",
-            "Fabrics",
-            "Foods",
-            "Medical",
-          ]}
+          categories={categoryList}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
@@ -77,21 +83,74 @@ export default function ProductListPage() {
           </select>
         </div>
 
-        {sortedProducts.length === 0 ? (
-          <p>No products found in the selected category or search term.</p>
-        ) : (
-          <div
-            className={`product-grid ${
-              sortedProducts.length >= 4
-                ? "dynamic-grid"
-                : `count-${sortedProducts.length}`
-            }`}
+        <div className="product-page-layout">
+          {/* LEFT: Product Grid */}
+          <div className="products-section">
+            {categoryData[selectedCategory] && (
+              <div className="category-details">
+                <img
+                  src={categoryData[selectedCategory].image}
+                  alt={selectedCategory}
+                  className="category-banner"
+                />
+                <p>{categoryData[selectedCategory].description}</p>
+              </div>
+            )}
+
+            {sortedProducts.length === 0 ? (
+              <p>No products found in this category or matching search term.</p>
+            ) : (
+              <div
+                className={`product-grid ${
+                  sortedProducts.length >= 4
+                    ? "dynamic-grid"
+                    : `count-${sortedProducts.length}`
+                }`}
+              >
+                {sortedProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    setLightboxImage={setLightboxImage}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT: Quotation Form */}
+          <div className="form-section">
+            <QuotationForm
+              categories={categoryList}
+              products={products}
+            />
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+
+      {lightboxImage && (
+        <div className="image-lightbox" style={{ display: "flex" }}>
+          <span
+            className="lightbox-close"
+            onClick={() => setLightboxImage(null)}
           >
-            {sortedProducts.map((product) => {
+            &times;
+          </span>
+          <img src={lightboxImage} alt="Full Size" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ✅ Product Card
+function ProductCard({ product, setLightboxImage }) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="product-card" key={product.id}>
+    <div className="product-card">
       <img
         src={product.images[0]}
         alt={product.name}
@@ -103,7 +162,6 @@ export default function ProductListPage() {
       <p className="discount">Price: ₹{product.discountedPrice}</p>
       <p>MOQ: {product.exportMOQ}</p>
 
-      {/* Toggle button */}
       <button
         className="details-toggle"
         onClick={() => setShowDetails(!showDetails)}
@@ -111,12 +169,10 @@ export default function ProductListPage() {
         {showDetails ? "Hide Details" : "View Details"}
       </button>
 
-      {/* Conditional details */}
       {showDetails && (
         <div className="extra-details">
           <p>
-            <strong>Available in:</strong>{" "}
-            {product.countryAvailability.join(", ")}
+            <strong>Available in:</strong> {product.countryAvailability.join(", ")}
           </p>
           <p>
             <strong>Size/Weight:</strong> {product.sizeWeight}
@@ -135,24 +191,4 @@ export default function ProductListPage() {
       </Link>
     </div>
   );
-})}
-
-          </div>
-        )}
-      </main>
-
-      <Footer />
-
-      {/* Lightbox */}
-      {lightboxImage && (
-        <div className="image-lightbox" style={{ display: "flex" }}>
-          <span className="lightbox-close" onClick={() => setLightboxImage(null)}>
-            &times;
-          </span>
-          <img src={lightboxImage} alt="Full Size" />
-        </div>
-      )}
-    </div>
-  );
 }
- 

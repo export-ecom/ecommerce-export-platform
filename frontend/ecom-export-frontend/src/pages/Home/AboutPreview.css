@@ -1,0 +1,68 @@
+.about-preview {
+  padding: 60px 0;
+}
+
+/* 3D Floating Image */
+.about-img {
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+  transform-style: preserve-3d;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+/* Floating Animation */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+
+/* About Text Styling */
+.about-preview .col-md-6 h2 {
+  font-weight: 800;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.about-preview .col-md-6 p {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1.2s ease forwards;
+  opacity: 0;
+}
+
+.about-preview .btn {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-preview .btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in Up Animation */
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-img {
+    max-height: 250px;
+    margin-bottom: 20px;
+  }
+}
