@@ -14,7 +14,6 @@ function AIAssistant() {
                 onClick={handleClick}
                 title="AI Assistant"
             >
-                🤖
             </button>
         </>
     );

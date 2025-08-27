@@ -1,0 +1,77 @@
+.section {
+  text-align: center;
+  padding: 50px 20px;
+  background: #f9f9f9;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #111;
+  font-weight: 700;
+}
+
+.marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  gap: 50px;
+  animation: scroll 8s linear infinite; /* speed up */
+  width: max-content; /* ensures smooth loop */
+}
+
+.logoCard {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.logoCard img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+  padding: 5px;
+  background: #fff;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Pause only when hovering the logo */
+.logoCard img:hover {
+  transform: scale(1.1);
+  animation-play-state: paused; /* works with the keyframe below */
+}
+
+/* Make the animation pausable via hover */
+.track {
+  display: flex;
+  gap: 50px;
+  animation: scroll 8s linear infinite;
+  width: max-content;
+}
+
+.track.paused {
+  animation-play-state: paused;
+}
+
+.logoCard img:hover ~ .track,
+.logoCard:hover .track {
+  animation-play-state: paused;
+}
+
+.logoCard p {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Smooth infinite scroll */
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}

@@ -1,29 +1,91 @@
-import React from 'react';
+import React from "react";
+import { motion } from "framer-motion";
 
-import Header from '../../components/Header/Header';
-import AIAssistant from '../../components/AIAssistant/AIAssistant';
-import Footer from '../../components/Footer/Footer';
-import Banner from './Banner';
-import Features from './Features';
-import Testimonials from './Testimonials';
+import Header from "../../components/Header/Header";
+import AIAssistant from "../../components/AIAssistant/AIAssistant";
+import Footer from "../../components/Footer/Footer";
+import Banner from "./Banner";
+import Features from "./Features";
+import Testimonials from "./Testimonials";
+import AboutPreview from "./AboutPreview";
+import ProductPreview from "./ProductPreview";
+import Achievements from "./Achievements";
+import TeamPreview from "./TeamPreview";
+import Certifications from "./Certification";
+import DynamicMap from "./DynamicMap";
+import "./Home.css";
 
 function Home() {
-    return (
-        <>
-            <Header />
-            <main className="container px-3">
-                <Banner />
-                <Features />
-                <Testimonials />
+  return (
+    <>
+      <Header />
+      <main className="container px-0">
+        <Banner />
 
-                <div className="d-flex justify-content-center my-4">
-                    {/* <AIAssistant /> */}
-                </div>
-            </main>
+        {/* 3D Cinematic Parallax Section */}
+        <section className="parallax-section">
+          {/* Background layers */}
+          <div className="parallax-layer layer1"></div>
+          <div className="parallax-layer layer2"></div>
+          <div className="parallax-layer layer3"></div>
 
-            <Footer />
-        </>
-    );
+          {/* Animated Overlay */}
+          <motion.div
+            className="overlay text-center"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <h2 className="fw-bold text-white title-animate">Discover Our Story</h2>
+            <p className="text-light subtitle-animate">
+              Innovation meets dedication at every step.
+            </p>
+          </motion.div>
+        </section>
+
+        <AboutPreview />
+        <div className="gradient-separator"></div>
+        <DynamicMap />
+
+        <ProductPreview />
+
+        <div className="gradient-separator"></div>
+
+        <Features />
+
+        <div className="gradient-separator"></div>
+
+        {/* Testimonials in Parallax */}
+        <section className="parallax-section parallax-alt slim-parallax">
+          <motion.div
+            className="overlay"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h2 className="fw-bold text-white mb-3 title-animate">
+              What Our Clients Say
+            </h2>
+            <div className="testimonial-compact">
+              <Testimonials />
+            </div>
+          </motion.div>
+        </section>
+
+        <Achievements />
+        <div className="gradient-separator"></div>
+        <TeamPreview />
+        <div className="gradient-separator"></div>
+        <Certifications />
+
+        <div className="d-flex justify-content-center my-4">
+          {/* <AIAssistant /> */}
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default Home;

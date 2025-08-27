@@ -128,39 +128,7 @@ button:focus-visible {
   }
 }
 
-/* ===========================
-   AI Assistant Floating Button
-   =========================== */
-.ai-assistant-btn {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  width: 70px !important;
-  height: 70px !important;
-  font-size: 2rem !important;
-  animation: bounce 1.5s infinite ease-in-out !important;
-  z-index: 1050 !important;
-}
 
-.ai-assistant-btn:hover {
-  transform: scale(1.1) !important;
-  background-color: #0b5ed7;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
-
-.ai-assistant-label {
-  position: fixed;
-  bottom: 100px;
-  /* just above the button */
-  right: 20px;
-  background: white;
-  color: #007bff;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
 
 @keyframes bounce {
 
@@ -186,13 +154,13 @@ button:focus-visible {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.ai-assistant-container {
+ /* .ai-assistant-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1050;
   /* higher than most Bootstrap elements */
-}
+/* }
 
 .ai-assistant-container button {
   border-radius: 50%;
@@ -203,7 +171,7 @@ button:focus-visible {
 .ai-assistant-container button:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
+}  */ */
 
 
 /* ===========================
