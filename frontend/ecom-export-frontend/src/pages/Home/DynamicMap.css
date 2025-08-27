@@ -19,7 +19,6 @@
   /* stronger visibility */
   pointer-events: none;
   transition: transform 0.15s ease-out;
-  animation: driftVideo 90s linear infinite alternate;
 }
 
 @keyframes driftVideo {
