@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Button from '../../components/Button/Button';
 
 import Header from "../../components/Header/Header";
 import AIAssistant from "../../components/AIAssistant/AIAssistant";
@@ -20,7 +21,7 @@ function Home() {
     <>
       <Header />
       <main className="container px-0">
-        <Banner />
+        {/* <Banner /> */}
 
         {/* 3D Cinematic Parallax Section */}
         <section className="parallax-section">
@@ -37,10 +38,19 @@ function Home() {
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true }}
           >
+            <h1 className="display-3 fw-bold mb-3 fade-in">
+              Welcome to <span className="highlight">Oringo International</span>
+            </h1>
             <h2 className="fw-bold text-white title-animate">Discover Our Story</h2>
             <p className="text-light subtitle-animate">
-              Innovation meets dedication at every step.
+              Your one-stop solution for Exporting products.
             </p>
+            <Button
+              className="btn-lg btn-modern"
+              onClick={() => navigate("/auth")}
+            >
+              Login/Register
+            </Button>
           </motion.div>
         </section>
 
