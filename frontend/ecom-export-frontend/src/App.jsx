@@ -18,6 +18,9 @@ import ProductList from './pages/Product/ProductList';
 import ProductDetailPage from "./pages/Product/ProductDetail";
 import CartPage from "./pages/Cart/Cart";
 import CheckoutPage from './pages/Checkout/Checkout';
+import ProtectedRoute from "./ProtectedRoute.jsx";
+import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
 
 
 
@@ -33,34 +36,45 @@ import AdminProfileSettings from './pages/AdminDashboard/ProfileSettings';
 
 function App() {
   return (
+    <AuthProvider>
+      <CartProvider>
 
-      <Routes>
-        {/* Public Pages */}
-        <Route path="/" element={<Home />} />
-        <Route path="/inquiry" element={<InquiryRequestPage />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/FAQ" element={<FAQ />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/shipping" element={<ShippingReturn />} />
-        <Route path="/blog" element={<BlogList />} />
-        <Route path="/blog/:slug" element={<BlogDetail />} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/products/:id" element={<ProductDetailPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Routes>
+          {/* Public Pages */}
+          <Route path="/" element={<Home />} />
+          <Route path="/inquiry" element={<InquiryRequestPage />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/shipping" element={<ShippingReturn />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
 
 
-        {/* Dashboards */}
-        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
-        <Route path="/customer/profile" element={<CustomerProfileSettings />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/profile" element={<AdminProfileSettings />} />
-    
-    </Routes>
+          {/* Dashboards */}
+          <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+          <Route path="/customer/profile" element={<CustomerProfileSettings />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/profile" element={<AdminProfileSettings />} />
+
+        </Routes>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 export default App;

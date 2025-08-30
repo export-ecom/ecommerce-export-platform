@@ -15,8 +15,12 @@ import TeamPreview from "./TeamPreview";
 import Certifications from "./Certification";
 import DynamicMap from "./DynamicMap";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function Home() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   return (
     <>
       <Header />
@@ -45,12 +49,18 @@ function Home() {
             <p className="text-light subtitle-animate">
               Your one-stop solution for Exporting products.
             </p>
-            <Button
-              className="btn-lg btn-modern"
-              onClick={() => navigate("/auth")}
-            >
-              Login/Register
-            </Button>
+            <div>
+              {user ? (
+                <Button className="btn-lg btn-modern" onClick={logout}>
+                  Logout
+                </Button>
+              ) : (
+                <Button className="btn-lg btn-modern" onClick={() => navigate("/auth")}>
+                  Login / Register
+                </Button>
+              )}
+            </div>
+
           </motion.div>
         </section>
 

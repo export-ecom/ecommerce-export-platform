@@ -1,5 +1,6 @@
 from pathlib import Path
-
+import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,19 +31,23 @@ INSTALLED_APPS = [
       
     # Third-party
     'rest_framework',
+    "rest_framework_simplejwt.token_blacklist",
     'corsheaders',
     
     # Local apps
     'apps.users',
     'apps.products',
-    'apps.categories',
+
     'apps.cart',
     'apps.orders',
     'apps.inquiries',
     'apps.payments',
+
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
+    
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     "django.middleware.security.SecurityMiddleware",
@@ -53,7 +58,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS for Vite dev server
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Vite dev server
+    "http://localhost:3000",  # if used
+]
+CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = "ecom_export_backend.urls"
 
 TEMPLATES = [
@@ -134,10 +144,30 @@ DEBUG = config("DEBUG", default=True, cast=bool)
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ]
 }
+
 
 AUTH_USER_MODEL = "users.CustomUser"
 
+
+
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),   # default = 5 mins
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),      # default = 1 day
+    "ROTATE_REFRESH_TOKENS": True,   # generate new refresh token on use
+    "BLACKLIST_AFTER_ROTATION": True, 
+
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
