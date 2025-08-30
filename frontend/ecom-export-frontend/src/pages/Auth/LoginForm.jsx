@@ -1,13 +1,38 @@
 import React, { useState } from "react";
+import API from "../../api/api"; // axios instance with baseURL from .env
+import { useNavigate } from "react-router-dom";
+
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logging in", { email, password });
+
+    try {
+      const res = await API.post("/login/", { email, password });
+
+      localStorage.setItem("access", res.data.access);
+      localStorage.setItem("refresh", res.data.refresh);
+
+      // ✅ Fetch user profile after login
+      const profileRes = await API.get("/me/");
+      localStorage.setItem("user", JSON.stringify(profileRes.data));
+
+      alert("Login successful!");
+      navigate("/");
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+      alert("Login failed. Check credentials.");
+    }
   };
+
+
+
+
 
   return (
     <form onSubmit={handleLogin} className="d-flex flex-column gap-3">

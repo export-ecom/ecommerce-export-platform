@@ -10,9 +10,27 @@ export default function CartPage() {
 
   // Calculate total price dynamically
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.discountedPrice * item.quantity,
+    (acc, item) =>
+      acc + (item.product_detail?.discountedPrice || item.product_detail?.price || 0) * item.quantity,
     0
   );
+
+  // Total number of products (sum of quantities)
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const getImageUrl = (item) => {
+    const images = item.product_detail?.images; // changed here
+    if (!images || images.length === 0) return "/placeholder.png";
+
+    // If first item is an object with 'image' key
+    if (typeof images[0] === "object" && images[0]?.image) return images[0].image;
+
+    // If first item is a string URL
+    if (typeof images[0] === "string") return images[0];
+
+    return "/placeholder.png"; // fallback
+  };
+
 
   return (
     <div className="page-container">
@@ -32,12 +50,21 @@ export default function CartPage() {
             <div className="cart-items">
               {cart.map((item) => (
                 <div key={item.id} className="cart-item">
-                  <img src={item.images[0]} alt={item.name} className="cart-img" />
-                  <div className="cart-info">
-                    <h2>{item.name}</h2>
-                    <p className="price">₹{item.discountedPrice}</p>
+                  <img
+                    src={getImageUrl(item)}
+                    alt={item.product_detail?.name || "Product"}
 
-                    {/* ✅ Quantity Selector */}
+                    className="cart-img"
+                  />
+                  <div className="cart-info">
+                    <h2>{item.product_detail?.name || "Product"}</h2>
+
+                    <p className="price">
+                      ₹{item.product_detail?.discountedPrice || item.product_detail?.price || 0}
+                    </p>
+
+
+                    {/* Quantity Selector */}
                     <div className="quantity-controls">
                       <button
                         className="qty-btn"
@@ -66,7 +93,11 @@ export default function CartPage() {
                       </button>
                     </div>
 
-                    <p className="subtotal">Subtotal: ₹{item.discountedPrice * item.quantity}</p>
+                    <p className="subtotal">
+                      Subtotal: ₹
+                      {(item.product_detail?.discountedPrice || item.product_detail?.price || 0) *
+                        item.quantity}
+                    </p>
 
                     <button
                       className="remove-btn"
@@ -82,13 +113,12 @@ export default function CartPage() {
             <div className="cart-summary">
               <h2>Order Summary</h2>
               <div className="summary-details">
-                <p>Items: <span>{cart.length}</span></p>
+                <p>Items: <span>{totalItems}</span></p>
                 <p>Total Price: <span>₹{totalPrice}</span></p>
               </div>
-              <Link to="/checkout" className="checkout-btn">
-                Proceed to Checkout →
-              </Link>
+              <Link to="/checkout" className="checkout-btn">Proceed to Checkout →</Link>
             </div>
+
           </div>
         )}
       </div>

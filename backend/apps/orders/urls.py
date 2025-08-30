@@ -1,6 +1,8 @@
-from rest_framework.routers import DefaultRouter
-from .views import OrderViewSet
+from django.urls import path
+from .views import PlaceOrderView
 
-router = DefaultRouter()
-router.register("", OrderViewSet, basename="orders")
-urlpatterns = router.urls
+urlpatterns = [
+    path("place-order/", PlaceOrderView.as_view(), name="place-order"),
+]
+
+# POST http://127.0.0.1:8000/api/orders/place-order/

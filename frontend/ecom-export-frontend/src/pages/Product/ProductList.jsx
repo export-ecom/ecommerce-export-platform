@@ -4,51 +4,71 @@ import { Link, useLocation } from "react-router-dom";
 import "./ProductList.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import products from "./Products";
-import categoryData from "./CategoryData";
-import QuotationForm from "../../components/QuotationForm"; 
+import QuotationForm from "../../components/QuotationForm";
+import API from "../../api/api"; // Axios instance with baseURL
 
 export default function ProductListPage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const initialCategory = queryParams.get("category") || "Foods"; // default to Foods
+  const initialCategory = queryParams.get("category") || "";
 
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("default");
   const [lightboxImage, setLightboxImage] = useState(null);
 
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  // Fetch categories
   useEffect(() => {
-    const category = queryParams.get("category") || "Foods";
+    API.get("/products/categories/")
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.error("Error fetching categories:", err));
+  }, []);
+
+  // Fetch products
+  useEffect(() => {
+    API.get("/products/products/")
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error("Error fetching products:", err));
+  }, []);
+
+  // Update category from query params
+  useEffect(() => {
+    const category = queryParams.get("category") || "";
     setSelectedCategory(category);
   }, [location.search]);
 
-  const filteredByCategory = products.filter(
-    (p) => p.category === selectedCategory
+  // Get selected category object for filtering
+  const selectedCategoryObj = categories.find((c) => c.name === selectedCategory);
+
+  // Filter products by category
+  const filteredProducts = products.filter(
+    (p) =>
+      !selectedCategory ||
+      p.category?.id === selectedCategoryObj?.id ||
+      p.category?.name === selectedCategory
   );
 
-  const filteredProducts = filteredByCategory.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter by search term
+  const searchedProducts = filteredProducts.filter((p) =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  // Sort products
+  const sortedProducts = [...searchedProducts].sort((a, b) => {
     switch (sortOption) {
       case "priceLowHigh":
-        return a.discountedPrice - b.discountedPrice;
+        return parseFloat(a.price) - parseFloat(b.price);
       case "priceHighLow":
-        return b.discountedPrice - a.discountedPrice;
-      case "discount":
-        const discountA = ((a.mrp - a.discountedPrice) / a.mrp) * 100;
-        const discountB = ((b.mrp - b.discountedPrice) / b.mrp) * 100;
-        return discountB - discountA;
+        return parseFloat(b.price) - parseFloat(a.price);
       case "nameAZ":
         return a.name.localeCompare(b.name);
       default:
         return 0;
     }
   });
-
-  const categoryList = ["Foods", "Spiritual Items", "Handicrafts", "Medical"];
 
   return (
     <div className="page-container">
@@ -58,7 +78,7 @@ export default function ProductListPage() {
         <h1>Our Products</h1>
 
         <ProductCategory
-          categories={categoryList}
+          categories={categories.map((c) => c.name)}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
@@ -78,34 +98,20 @@ export default function ProductListPage() {
             <option value="default">Sort by</option>
             <option value="priceLowHigh">Price: Low to High</option>
             <option value="priceHighLow">Price: High to Low</option>
-            <option value="discount">Discount %</option>
             <option value="nameAZ">Name: A to Z</option>
           </select>
         </div>
 
         <div className="product-page-layout">
-          {/* LEFT: Product Grid */}
           <div className="products-section">
-            {categoryData[selectedCategory] && (
-              <div className="category-details">
-                <img
-                  src={categoryData[selectedCategory].image}
-                  alt={selectedCategory}
-                  className="category-banner"
-                />
-                <p>{categoryData[selectedCategory].description}</p>
-              </div>
-            )}
-
             {sortedProducts.length === 0 ? (
               <p>No products found in this category or matching search term.</p>
             ) : (
               <div
-                className={`product-grid ${
-                  sortedProducts.length >= 4
-                    ? "dynamic-grid"
-                    : `count-${sortedProducts.length}`
-                }`}
+                className={`product-grid ${sortedProducts.length >= 4
+                  ? "dynamic-grid"
+                  : `count-${sortedProducts.length}`
+                  }`}
               >
                 {sortedProducts.map((product) => (
                   <ProductCard
@@ -118,10 +124,9 @@ export default function ProductListPage() {
             )}
           </div>
 
-          {/* RIGHT: Quotation Form */}
           <div className="form-section">
             <QuotationForm
-              categories={categoryList}
+              categories={categories.map((c) => c.name)}
               products={products}
             />
           </div>
@@ -132,10 +137,7 @@ export default function ProductListPage() {
 
       {lightboxImage && (
         <div className="image-lightbox" style={{ display: "flex" }}>
-          <span
-            className="lightbox-close"
-            onClick={() => setLightboxImage(null)}
-          >
+          <span className="lightbox-close" onClick={() => setLightboxImage(null)}>
             &times;
           </span>
           <img src={lightboxImage} alt="Full Size" />
@@ -145,44 +147,43 @@ export default function ProductListPage() {
   );
 }
 
-// ✅ Product Card
+// ----------------------
+// ProductCard Component
+// ----------------------
 function ProductCard({ product, setLightboxImage }) {
   const [showDetails, setShowDetails] = useState(false);
+
+  // Use first image from the images array
+  const imageUrl =
+    product.images && product.images.length > 0
+      ? product.images[0].image
+      : "/placeholder.png";
 
   return (
     <div className="product-card">
       <img
-        src={product.images[0]}
+        src={imageUrl}
         alt={product.name}
-        onClick={() => setLightboxImage(product.images[0])}
+        onClick={() => setLightboxImage(imageUrl)}
         style={{ cursor: "pointer" }}
       />
       <h2>{product.name}</h2>
-      <p className="mrp">MRP: ₹{product.mrp}</p>
-      <p className="discount">Price: ₹{product.discountedPrice}</p>
-      <p>MOQ: {product.exportMOQ}</p>
+      <p>Price: ₹{product.price}</p>
+      <p>Available: {product.quantity_available}</p>
 
-      <button
-        className="details-toggle"
-        onClick={() => setShowDetails(!showDetails)}
-      >
+      <button onClick={() => setShowDetails(!showDetails)}>
         {showDetails ? "Hide Details" : "View Details"}
       </button>
 
       {showDetails && (
         <div className="extra-details">
-          <p>
-            <strong>Available in:</strong> {product.countryAvailability.join(", ")}
-          </p>
-          <p>
-            <strong>Size/Weight:</strong> {product.sizeWeight}
-          </p>
-          <p>
-            <strong>Material:</strong> {product.material}
-          </p>
-          <p>
-            <strong>Tags:</strong> {product.tags.join(", ")}
-          </p>
+          <p>{product.description}</p>
+          {product.attributes &&
+            Object.entries(product.attributes).map(([key, value]) => (
+              <p key={key}>
+                <strong>{key}:</strong> {value}
+              </p>
+            ))}
         </div>
       )}
 
